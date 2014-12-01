@@ -56,7 +56,6 @@ public class jcoSonTest
     public void testStructureParametersJson() throws JCoException, ParseException
     {
         // Test that importing or changing parameters to a SAP BAPI can be set using a json object
-
         //CAUTION : this will change the first name of the user TESTUSER in your SAP system
         jcoSon jco = new jcoSon(destination.getRepository().getFunction("BAPI_USER_CHANGE"));
         /*
