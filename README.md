@@ -1,7 +1,7 @@
 jcoSon
 ======
 
-Json api for SAP JCO ( SAP Java Connector 3.x)
+Json api for SAP JCO ( [SAP Java Connector 3.x](http://help.sap.com/saphelp_nwpi711/helpdata/en/48/70792c872c1b5ae10000000a42189c/content.htm) )
 
 
 This will allow you to call SAP BAPIs and function modules using json.  
