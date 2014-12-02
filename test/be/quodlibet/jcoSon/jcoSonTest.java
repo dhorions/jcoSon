@@ -18,7 +18,12 @@ public class jcoSonTest
     public jcoSonTest()
     {
     }
-
+    /**
+     * Make the connection to the SAP System
+     * Copy EXAMPLE.jcoDestination to SAPSYSTEM.jcoDestination and
+     * populate it with the connection data to your test system
+     * @throws JCoException
+     */
     @BeforeClass
     public static void setUpClass() throws JCoException
     {
@@ -29,76 +34,85 @@ public class jcoSonTest
     public static void tearDownClass()
     {
     }
-
+    /**
+     * Test that a connection to SAPSYSTEM (specified in file SAPSYSTEM.jcoDestination) can be made
+     * @throws JCoException
+     */
     @Test
     public void testConnection() throws JCoException
     {
-        // Test that a connection to SAPSYSTEM (specified in file SAPSYSTEM.jcoDestination) can be made
+        
         assertTrue(destination.isValid());
     }
+    /**
+     * Test that parameters to a SAP BAPI can be set using a json object
+     * {
+     *       "BANKKEY": "083000108",
+     *       "BANKCOUNTRY": "US"
+     * }
+     * @throws JCoException
+     * @throws ParseException
+     */
     @Test
     public void testSimpleParametersJson() throws JCoException, ParseException
     {
-        // Test that parameters to a SAP BAPI can be set using a json object
         jcoSon jco = new jcoSon(destination.getRepository().getFunction("BAPI_BANK_GETDETAIL"));
-        /*
-         {
-            "BANKKEY": "083000108",
-            "BANKCOUNTRY": "US"
-          } 
-         */
         jco.setParameters("{\"BANKKEY\":\"083000108\",\"BANKCOUNTRY\":\"US\"}");
         String resultJson = jco.execute(destination);
         System.out.println("Results :"+ resultJson);
         assertNotNull(resultJson);
     }
+    /**
+     * Test that importing or changing parameters to a SAP BAPI can be set using a json object
+     * CAUTION : this will change the first name of the user TESTUSER in your SAP system
+     * {
+     *       "USERNAME": "TESTUSER",
+     *       "ADDRESS": {
+     *         "FIRSTNAME": "New First Name"
+     *       },
+     *       "ADDRESSX": {
+     *         "FIRSTNAME": "X"
+     *       }
+     * }
+     * @throws JCoException
+     * @throws ParseException
+
+     */
     @Test
     public void testStructureParametersJson() throws JCoException, ParseException
     {
-        // Test that importing or changing parameters to a SAP BAPI can be set using a json object
-        //CAUTION : this will change the first name of the user TESTUSER in your SAP system
         jcoSon jco = new jcoSon(destination.getRepository().getFunction("BAPI_USER_CHANGE"));
-        /*
-         {
-            "USERNAME": "TESTUSER",
-            "ADDRESS": {
-              "FIRSTNAME": "New First Name"
-            },
-            "ADDRESSX": {
-              "FIRSTNAME": "X"
-            }
-          }
-         */
         jco.setParameters("{\"USERNAME\":\"TESTUSER\",\"ADDRESS\":{\"FIRSTNAME\":\"New First Name\"},\"ADDRESSX\":{\"FIRSTNAME\":\"X\"}}");
         String resultJson = jco.execute(destination);
         System.out.println("Results :"+ resultJson);
         assertNotNull(resultJson);
     }
+    /**
+     * Test that Table parameters to a SAP BAPI can be set using a json object
+     * {
+     *       "QUERY_TABLE": "USR02",
+     *       "DELIMITER": ",",
+     *       "OPTIONS": [
+     *         {
+     *           "TEXT": "BNAME LIKE 'TEST%'"
+     *         }
+     *       ],
+     *       "FIELDS": [
+     *         {
+     *           "FIELDNAME": "BNAME"
+     *         },
+     *         {
+     *           "FIELDNAME": "CLASS"
+     *         }
+            ]
+     *     }
+     * @throws JCoException
+     * @throws ParseException
+     */
      @Test
     public void testTableParametersJson() throws JCoException, ParseException
     {
-        // Test that Table parameters to a SAP BAPI can be set using a json object
-
         jcoSon jco = new jcoSon(destination.getRepository().getFunction("RFC_READ_TABLE"));
-        /*
-         {
-            "QUERY_TABLE": "USR02",
-            "DELIMITER": ",",
-            "OPTIONS": [
-              {
-                "TEXT": "BNAME LIKE 'TEST%'"
-              }
-            ],
-            "FIELDS": [
-              {
-                "FIELDNAME": "BNAME"
-              },
-              {
-                "FIELDNAME": "CLASS"
-              }
-            ]
-          }
-         */
         jco.setParameters("{\"QUERY_TABLE\":\"USR02\",\"DELIMITER\":\",\",\"OPTIONS\":[{\"TEXT\":\"BNAME LIKE 'TEST%'\"}],\"FIELDS\":[{\"FIELDNAME\":\"BNAME\"},{\"FIELDNAME\":\"CLASS\"}]}");
         String resultJson = jco.execute(destination);
         System.out.println("Results :"+ resultJson);

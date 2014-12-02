@@ -1,0 +1,9 @@
+SAPSYSTEM.jcoDestination
+build/*
+dist/jcoSon.jar
+nbproject/*
+build.xml
+lib/*
+manifest.mf
+#.gitignore
+*.jar
