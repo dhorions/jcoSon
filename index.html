@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jcoson by dhorions</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jcoson</h1>
+        <p>Json api for SAP JCO ( SAP Java Connector 3.x)</p>
+
+        <p class="view"><a href="https://github.com/dhorions/jcoSon">View the Project on GitHub <small>dhorions/jcoSon</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/dhorions/jcoSon/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/dhorions/jcoSon/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/dhorions/jcoSon">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="jcoson" class="anchor" href="#jcoson" aria-hidden="true"><span class="octicon octicon-link"></span></a>jcoSon</h1>
+
+<p>Json api for SAP JCO ( <a href="http://help.sap.com/saphelp_nwpi711/helpdata/en/48/70792c872c1b5ae10000000a42189c/content.htm">SAP Java Connector 3.x</a> )</p>
+
+<p>This will allow you to call SAP BAPIs and function modules using json.<br>
+Both the parameters you pass to the function modules and the results you get back will be in json format.</p>
+
+<p>Examples : </p>
+
+<ol>
+<li>Pass simple values to a BAPI</li>
+</ol>
+
+<div class="highlight highlight-javascript"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>BANKKEY<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>083000108<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>BANKCOUNTRY<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>US<span class="pl-pds">"</span></span>
+} </pre></div>
+
+<div class="highlight highlight-java"><pre>jcoSon jco <span class="pl-k">=</span> <span class="pl-k">new</span> jcoSon(destination<span class="pl-k">.</span>getRepository()<span class="pl-k">.</span>getFunction(<span class="pl-s1"><span class="pl-pds">"</span>BAPI_BANK_GETDETAIL<span class="pl-pds">"</span></span>));
+jco<span class="pl-k">.</span>setParameters(<span class="pl-s1"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>BANKKEY<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>083000108<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>BANKCOUNTRY<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>US<span class="pl-cce">\"</span>}<span class="pl-pds">"</span></span>);
+<span class="pl-stj">String</span> resultJson <span class="pl-k">=</span> jco<span class="pl-k">.</span>execute(destination);
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s1"><span class="pl-pds">"</span>Results :<span class="pl-pds">"</span></span><span class="pl-k">+</span> resultJson);</pre></div>
+
+<div class="highlight highlight-javascript"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>BANK_ADDRESS<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+    <span class="pl-s1"><span class="pl-pds">"</span>BANK_NAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>First Union Bank &amp; Trust<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>REGION<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>IL<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>STREET<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>500 Main Street<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>CITY<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Chicago<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>SWIFT_CODE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>BANK_GROUP<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>POBK_CURAC<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>BANK_NO<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>083000108<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>POST_BANK<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>BANK_BRANCH<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Main Office<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>ADDR_NO<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+  },
+  <span class="pl-s1"><span class="pl-pds">"</span>BANK_DETAIL<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+    <span class="pl-s1"><span class="pl-pds">"</span>CREAT_DATE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Fri Jan 03 00:00:00 CET 1997<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>CREATOR<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>GRAVEN<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>METHOD<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>FORMATTING<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>BANK_DELETE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+  }
+}</pre></div>
+
+<p>2.Pass Structure to a BAPI</p>
+
+<div class="highlight highlight-javascript"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>USERNAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>TESTUSER<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>ADDRESS<span class="pl-pds">"</span></span><span class="pl-k">:</span> 
+  {
+    <span class="pl-s1"><span class="pl-pds">"</span>FIRSTNAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>New First Name<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-s1"><span class="pl-pds">"</span>ADDRESSX<span class="pl-pds">"</span></span><span class="pl-k">:</span> 
+  {
+    <span class="pl-s1"><span class="pl-pds">"</span>FIRSTNAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>X<span class="pl-pds">"</span></span>
+  }
+ } </pre></div>
+
+<div class="highlight highlight-java"><pre>jcoSon jco <span class="pl-k">=</span> <span class="pl-k">new</span> jcoSon(destination<span class="pl-k">.</span>getRepository()<span class="pl-k">.</span>getFunction(<span class="pl-s1"><span class="pl-pds">"</span>BAPI_USER_CHANGE<span class="pl-pds">"</span></span>));
+jco<span class="pl-k">.</span>setParameters(<span class="pl-s1"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>USERNAME<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>TESTUSER<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>ADDRESS<span class="pl-cce">\"</span>:{<span class="pl-cce">\"</span>FIRSTNAME<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>New First Name<span class="pl-cce">\"</span>},<span class="pl-cce">\"</span>ADDRESSX<span class="pl-cce">\"</span>:{<span class="pl-cce">\"</span>FIRSTNAME<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>X<span class="pl-cce">\"</span>}}<span class="pl-pds">"</span></span>);
+<span class="pl-stj">String</span> resultJson <span class="pl-k">=</span> jco<span class="pl-k">.</span>execute(destination);
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s1"><span class="pl-pds">"</span>Results :<span class="pl-pds">"</span></span><span class="pl-k">+</span> resultJson);</pre></div>
+
+<div class="highlight highlight-javascript"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>RETURN<span class="pl-pds">"</span></span><span class="pl-k">:</span> [
+    {
+      <span class="pl-s1"><span class="pl-pds">"</span>TYPE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>S<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>ID<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>NUMBER<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>039<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>MESSAGE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>User TESTUSER has changed<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>LOG_NO<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>LOG_MSG_NO<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>000000<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>MESSAGE_V1<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>TESTUSER<span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>MESSAGE_V2<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>MESSAGE_V3<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>MESSAGE_V4<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>PARAMETER<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>ROW<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">0</span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>FIELD<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+      <span class="pl-s1"><span class="pl-pds">"</span>SYSTEM<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>XXXCLNT000<span class="pl-pds">"</span></span>
+    }
+  ]
+}</pre></div>
+
+<p>3.Pass Table to a BAPI</p>
+
+<div class="highlight highlight-javascript"><pre>{
+            <span class="pl-s1"><span class="pl-pds">"</span>QUERY_TABLE<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>USR02<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>DELIMITER<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>OPTIONS<span class="pl-pds">"</span></span><span class="pl-k">:</span> [
+              {
+                <span class="pl-s1"><span class="pl-pds">"</span>TEXT<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>BNAME LIKE 'TEST%'<span class="pl-pds">"</span></span>
+              }
+            ],
+            <span class="pl-s1"><span class="pl-pds">"</span>FIELDS<span class="pl-pds">"</span></span><span class="pl-k">:</span> [
+              {
+                <span class="pl-s1"><span class="pl-pds">"</span>FIELDNAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>BNAME<span class="pl-pds">"</span></span>
+              },
+              {
+                <span class="pl-s1"><span class="pl-pds">"</span>FIELDNAME<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>CLASS<span class="pl-pds">"</span></span>
+              }
+            ]
+          }</pre></div>
+
+<div class="highlight highlight-java"><pre>jcoSon jco <span class="pl-k">=</span> <span class="pl-k">new</span> jcoSon(destination<span class="pl-k">.</span>getRepository()<span class="pl-k">.</span>getFunction(<span class="pl-s1"><span class="pl-pds">"</span>RFC_READ_TABLE<span class="pl-pds">"</span></span>));
+jco<span class="pl-k">.</span>setParameters(<span class="pl-s1"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>QUERY_TABLE<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>USR02<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>DELIMITER<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>OPTIONS<span class="pl-cce">\"</span>:[{<span class="pl-cce">\"</span>TEXT<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>BNAME LIKE 'TEST%'<span class="pl-cce">\"</span>}],<span class="pl-cce">\"</span>FIELDS<span class="pl-cce">\"</span>:[{<span class="pl-cce">\"</span>FIELDNAME<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>BNAME<span class="pl-cce">\"</span>},{<span class="pl-cce">\"</span>FIELDNAME<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>CLASS<span class="pl-cce">\"</span>}]}<span class="pl-pds">"</span></span>);
+<span class="pl-stj">String</span> resultJson <span class="pl-k">=</span> jco<span class="pl-k">.</span>execute(destination);
+ <span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s1"><span class="pl-pds">"</span>Results :<span class="pl-pds">"</span></span><span class="pl-k">+</span> resultJson);</pre></div>
+
+<div class="highlight highlight-javascript"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>DATA<span class="pl-pds">"</span></span><span class="pl-k">:</span> [
+    {
+      <span class="pl-s1"><span class="pl-pds">"</span>WA<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>TESTUSER     ,DEVELOPER<span class="pl-pds">"</span></span>
+    },
+    {
+      <span class="pl-s1"><span class="pl-pds">"</span>WA<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>TEST_001    ,TEST<span class="pl-pds">"</span></span>
+    },
+    {
+      <span class="pl-s1"><span class="pl-pds">"</span>WA<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>TEST_001    ,TEST<span class="pl-pds">"</span></span>
+    }
+  ]
+}</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/dhorions">dhorions</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
